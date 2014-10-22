@@ -6,7 +6,7 @@
 
 	<groupId>com.invenline.library</groupId>
 	<artifactId>properties2json</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1-SNAPSHOT</version>
 
 	<packaging>jar</packaging>
 	<name>properties2json</name>
