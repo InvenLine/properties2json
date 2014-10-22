@@ -4,9 +4,30 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 class JsonFilesWriter {
+
+	private final PropertiesFilesMatcher propertiesFilesMatcher;
+
+	/**
+	 * Writer that reads from files matched by default matcher and writes to {@code filename_lang.json} files.
+	 *
+	 * @see com.invenline.library.properties2json.PropertiesFilesMatcher#PropertiesFilesMatcher()
+	 */
+	public JsonFilesWriter() {
+		this.propertiesFilesMatcher = new PropertiesFilesMatcher();
+	}
+
+	/**
+	 * Writer that reads from files matched by {@code propertiesFilesMatcher} and writes to {@code filename_lang.json}
+	 * files.
+	 *
+	 * @see com.invenline.library.properties2json.PropertiesFilesMatcher#PropertiesFilesMatcher(java.util.regex.Pattern,
+	 * int, int)
+	 */
+	public JsonFilesWriter(PropertiesFilesMatcher propertiesFilesMatcher) {
+		this.propertiesFilesMatcher = propertiesFilesMatcher;
+	}
 
 	public void generate(PropertiesConverter parser, String sourcePath, String targetPath) {
 
@@ -15,8 +36,7 @@ class JsonFilesWriter {
 		if (files != null) {
 			for (File file : files) {
 
-				Pattern pattern = Pattern.compile("([^_]*)_([^\\.]*)\\.properties");
-				Matcher matcher = pattern.matcher(file.getName());
+				Matcher matcher = propertiesFilesMatcher.getMatcher(file.getName());
 
 				while (matcher.find()) {
 
@@ -26,8 +46,8 @@ class JsonFilesWriter {
 						throw new RuntimeException("Parsing file: " + file.getName());
 					}
 
-					String fileName = matcher.group(1);
-					String languagePostfix = matcher.group(2);
+					String fileName = matcher.group(propertiesFilesMatcher.getFileNameGroupIndex());
+					String languagePostfix = matcher.group(propertiesFilesMatcher.getLanguageGroupIndex());
 					String path = targetPath + '/' + fileName + '_' + languagePostfix + ".json";
 
 					writeResult(jsonMessages, path);
