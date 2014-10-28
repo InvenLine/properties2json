@@ -63,7 +63,7 @@ class JsonFilesWriter {
 
 		try {
 			file.createNewFile();
-			PrintStream out = new PrintStream(file);
+			PrintStream out = new PrintStream(file, "UTF-8");
 			out.print(jsonMessages);
 			out.close();
 		} catch (IOException e) {
