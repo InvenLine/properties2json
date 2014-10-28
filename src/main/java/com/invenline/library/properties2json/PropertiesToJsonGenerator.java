@@ -39,6 +39,6 @@ public class PropertiesToJsonGenerator {
 	}
 
 	public void generate() {
-		jsonFilesWriter.generate(propertiesConverter, jsonDirectoryPathname, propertiesDirectoryPathname);
+		jsonFilesWriter.generate(propertiesConverter, propertiesDirectoryPathname, jsonDirectoryPathname);
 	}
 }
