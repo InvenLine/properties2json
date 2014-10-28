@@ -29,6 +29,7 @@ public class Properties2JsonApp {
 
 				case "--output-dir":
 					outputDirectory = args[i + 1];
+					break;
 
 				case "--matcher-mode":
 					arg = args[i + 1].toUpperCase();
