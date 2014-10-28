@@ -1,5 +1,6 @@
 package com.invenline.library.properties2json;
 
+import java.io.File;
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
 
@@ -14,13 +15,13 @@ public class MainTest {
 
 		Properties2JsonApp.main(new String[]{
 				"--input-dir", propertiesDirectory,
-				"--output-dir", propertiesDirectory,
+				"--output-dir", propertiesDirectory + File.separatorChar + "output-default",
 				"--matcher-mode", "DEFAULT"
 		});
 
 		Properties2JsonApp.main(new String[]{
 				"--input-dir", propertiesDirectory,
-				"--output-dir", propertiesDirectory,
+				"--output-dir", propertiesDirectory + File.separatorChar + "output-play",
 				"--matcher-mode", "PLAY"
 		});
 	}
